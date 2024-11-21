@@ -6,6 +6,7 @@
     <meta name="description" content="Explore the Calendar September 1752 phenomenon - when 11 days vanished from history. Learn how Calendar September 1752 changed timekeeping forever.">
     <meta name="keywords" content="Calendar September 1752, Julian calendar, Gregorian calendar, missing days September 1752, British calendar change 1752">
     <title>Calendar September 1752: The Mystery of 11 Missing Days | Historical Timeline</title>
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -323,148 +324,16 @@ Su Mo Tu We Th Fr Sa
         <p>The Calendar September 1752 story continues to fascinate historians and scholars today.</p>
     </footer>
 
-    <script>
-    window.onload = function() {
-        const yearSelect = document.getElementById('inputYear');
-        const daySelect = document.getElementById('inputDay');
-        
-        // 添加年份选项（比如1740-1760）
-        for (let year = 1740; year <= 1760; year++) {
-            const option = document.createElement('option');
-            option.value = year;
-            option.text = year;
-            if (year === 1752) {
-                option.selected = true;
-            }
-            yearSelect.appendChild(option);
-        }
-        
-        // 更新日期选项的函数
-        function updateDays() {
-            const year = parseInt(yearSelect.value);
-            const month = parseInt(document.getElementById('inputMonth').value);
-            const isSpecialDate = (year === 1752 && month === 9);
-            
-            // 清空现有选项
-            daySelect.innerHTML = '<option value="">Day</option>';
-            
-            // 获取月份的天数
-            let daysInMonth;
-            if (month === 2) {
-                // 简单的闰年计算
-                daysInMonth = ((year % 4 === 0 && year % 100 !== 0) || year % 400 === 0) ? 29 : 28;
-            } else if ([4, 6, 9, 11].includes(month)) {
-                daysInMonth = 30;
-            } else {
-                daysInMonth = 31;
-            }
-            
-            // 添加日期选项
-            for (let i = 1; i <= daysInMonth; i++) {
-                // 对于1752年9月，跳过3-13日
-                if (isSpecialDate && i > 2 && i < 14) continue;
-                
-                const option = document.createElement('option');
-                option.value = i;
-                option.text = i;
-                daySelect.appendChild(option);
-            }
-            
-            // 显示或隐藏提示信息
-            document.getElementById('dateNotice').style.display = 
-                isSpecialDate ? 'block' : 'none';
-        }
-        
-        // 初始化日期选项
-        updateDays();
-        
-        // 添加事件监听器
-        yearSelect.addEventListener('change', updateDays);
-        document.getElementById('inputMonth').addEventListener('change', updateDays);
-    }
+    <div style="display:none">
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZE49M898JW"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
 
-    function convertDate() {
-        const day = parseInt(document.getElementById('inputDay').value);
-        const month = parseInt(document.getElementById('inputMonth').value);
-        const year = parseInt(document.getElementById('inputYear').value);
-        const calendarType = document.getElementById('calendarType').value;
-        const explanationDiv = document.getElementById('explanation');
-        
-        if (!day) {
-            alert('Please select a day');
-            return;
-        }
-
-        let resultDay = day;
-        let explanation = '';
-        
-        if (year === 1752 && month === 9) {
-            if (calendarType === 'julian' && day <= 2) {
-                resultDay = day + 11;
-                explanation = `
-                    <strong>What happened?</strong><br>
-                    If you lived in Britain on September ${day}, 1752 (Julian calendar), you would have gone to sleep on 
-                    September ${day} and woken up on September ${resultDay}! This was because Britain needed to align 
-                    with the more accurate Gregorian calendar, which required skipping 11 days.
-                `;
-            } else if (calendarType === 'gregorian' && day >= 14) {
-                resultDay = day - 11;
-                explanation = `
-                    <strong>Historical Context:</strong><br>
-                    September ${day}, 1752 (Gregorian) would have been September ${resultDay} in the old Julian calendar. 
-                    This shows how the calendar adjustment affected dates during this historic transition.
-                `;
-            } else if (day > 2 && day < 14) {
-                explanation = `
-                    <strong>Interesting Fact:</strong><br>
-                    This date didn't exist in September 1752! The dates from September 3rd to 13th were completely 
-                    skipped when Britain adopted the Gregorian calendar.
-                `;
-            }
-        } else {
-            explanation = `
-                <strong>Note:</strong><br>
-                The dramatic 11-day calendar shift only occurred in September 1752 in Britain and its colonies. 
-                Other dates weren't affected by this specific calendar change.
-            `;
-        }
-        
-        const monthNames = [
-            'January', 'February', 'March', 'April', 'May', 'June',
-            'July', 'August', 'September', 'October', 'November', 'December'
-        ];
-        
-        let resultHTML = `Original Date: ${monthNames[month-1]} ${day}, ${year}`;
-        
-        if (year === 1752 && month === 9 && ((day <= 2 && calendarType === 'julian') || (day >= 14 && calendarType === 'gregorian'))) {
-            resultHTML += ` (${calendarType === 'julian' ? 'Julian' : 'Gregorian'})<br>
-                Converted Date: ${monthNames[month-1]} ${resultDay}, ${year} (${calendarType === 'julian' ? 'Gregorian' : 'Julian'})`;
-        }
-        
-        document.getElementById('result').innerHTML = resultHTML;
-        explanationDiv.innerHTML = explanation;
-        explanationDiv.style.display = 'block';
-    }
-
-    function checkAnswer() {
-        const selected = document.querySelector('input[name="q1"]:checked');
-        const resultElement = document.getElementById('quiz-result');
-        
-        if (!selected) {
-            alert('Please select an answer!');
-            return;
-        }
-        
-        if (selected.value === 'b') {
-            resultElement.innerHTML = '✅ Correct! The change was made to align the calendar with solar events.';
-            resultElement.style.color = 'green';
-        } else {
-            resultElement.innerHTML = '❌ Incorrect. Try again!';
-            resultElement.style.color = 'red';
-        }
-        
-        resultElement.style.display = 'block';
-    }
-    </script>
+            gtag('config', 'G-ZE49M898JW');
+        </script>
+    </div>
 </body>
 </html> 
